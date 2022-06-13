@@ -1,0 +1,451 @@
+<!--*=============================== HEAD =============================-->
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<link rel="shortcut icon" th:href="@{/image/2.png}">
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Reubica</title>
+
+	<!--TODO STYLE CSS [TAILWIND]  -->
+	<link rel="stylesheet" type="text/css" th:href="@{/css/main.css}" />
+
+
+
+</head>
+
+
+<!--*=============================== BODY =============================-->
+
+<body>
+	<!--? HEADER  -->
+	<header>
+
+		<!--?================= NAV HEADER ================-->
+		<nav
+			class="grid grid-cols-5 items-center relative justify-between flex-wrap bg-black ">
+
+			<!-- LOGO -->
+			<div class="logo ml-36"></div>
+
+			<!-- PAGES NAME --->
+			<div
+				class="col-span-3 text-sm lg:flex-grow flex justify-evenly mx-40">
+				<a th:href="@{/}"
+					class="block mt-4 text-xl lg:inline-block lg:mt-0 text-white hover:text-green-200 ">
+					Inicio </a> <a th:href="@{/protectora}"
+					class="block mt-4 text-xl  lg:inline-block lg:mt-0 text-white hover:text-green-200 ">
+					Protectoras </a> <a th:href="@{/faq}"
+					class="block mt-4 text-xl  lg:inline-block lg:mt-0 text-white hover:text-green-200 ">
+					FAQ </a> <a th:href="@{/porque-adoptar}"
+					class="block mt-4 text-xl  lg:inline-block lg:mt-0 text-white hover:text-green-200 ">
+					Porque adoptar? </a>
+			</div>
+
+			<!-- BUTTON INICIAR SESION --->
+			<div id="iniciarSesion" class="col-start-5 ">
+				<a 
+					class="block mt-4 text-xl cursor-pointer lg:inline-block lg:mt-0 text-white hover:text-green-200 ">
+					Iniciar sesión </a>
+
+			</div>
+
+			<!-- ICONO PARA DIRECCIONAR A LA PAGINA [CONFIG PROTECTORA]-->
+			<div id="sesionIniciada" class="hidden hola col-start-5">
+				<a th:href="@{/protectora}" id="nickNameHeader"
+					class="block mt-4 text-xl  lg:inline-block lg:mt-0 text-white ">
+					Hola <span id="nickName"
+					class="pl-1  hover:text-green-200 text-green-400">Veu Animal</span>
+					<i class="pl-1 fa-solid fa-shield-dog"></i>
+				</a> <a onclick="logOut()" id="logOut" 
+					class="block mt-4 text-xl  lg:inline-block lg:mt-0 text-white hover:text-green-200 ">
+					<i class="pl-8 fa-solid fa-arrow-right-from-bracket"></i>
+				</a>
+			</div>
+
+		</nav>
+		<!-- FIM NAV --->
+
+	</header>
+	<!-- FIM HEADER --->
+
+
+	<!--*=============================== MODAL LOGIN =============================-->
+
+	<!--? MODAL LOGIN --->
+	<div
+		class="contanier-login flex items-center 2xl:w-2/6 2xl:py-32 justify-center px-4 sm:px-6 lg:px-8 bg-green-400">
+		<!-- CONTAINER LOGIN -->
+		<div class="max-w-md m-auto w-full space-y-8">
+			<!-- IMG LOGO --->
+			<div class="bg-imagen w-full">
+				<img class="logo-login mt-4 mx-auto h-150 w-auto"
+					th:src="@{/image/2.png}" alt="Workflow" />
+			</div>
+			<!-- TITULO -->
+			<h2 class="text-center text-3xl font-extrabold text-gray-900">
+				Eres una protectora? ¡Haga el login aquí!</h2>
+
+			<!--? FORMULARIO DE LOGIN --->
+			<form class="mt-8 space-y-6" action="#" method="POST">
+				<input type="hidden" name="remember" value="true" />
+				<div class="rounded-md shadow-sm -space-y-px">
+					<div>
+						<!-- INPUT EMAIL -->
+						<label for="email-address" class="sr-only">Correo
+							eletrónico</label> <input id="email-address" name="email" type="email"
+							autocomplete="email" required
+							class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+							placeholder="Correo eletrónico" />
+					</div>
+					<div>
+						<!-- INPUT CONTRASEÑA -->
+						<label for="password" class="sr-only">Contraseña</label> <input
+							id="password" name="password" type="password"
+							autocomplete="current-password" required
+							class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+							placeholder="Contraseña" />
+					</div>
+				</div>
+				<div>
+					<!-- BUTTON LOGIN -->
+					<button onclick="conectadoLogin()" type="submit"
+						class="group relative w-full flex justify-center mb-5 py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-black hover:bg-white hover:text-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+						<span class="absolute left-0 inset-y-0 flex items-center pl-3">
+							<svg class="h-5 w-5 text-white group-hover:text-black"
+								xmlns:th="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+								fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd"
+									d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+									clip-rule="evenodd" />
+                </svg>
+						</span> Login
+					</button>
+				</div>
+			</form>
+			<!-- FIN FORM LOGIN -->
+		</div>
+		<!-- FIN CONTAINER LOGIN -->
+	</div>
+	<!-- FIN MODAL LOGIN --->
+
+	<!--*=============================== MAIN SECTION =============================-->
+
+	<!--? SESION PRINCIPAL  -->
+	<main class=" sesion-principal mx-auto">
+		<!--? CONTAINER PAGINA PRINCIPAL W-100%  -->
+		<div class="text-center">
+
+			<!--! GRID PARA SEPARAR    [FILTRO   |  PERROS] -->
+			<div class="grid grid-cols-12 grid-rows-1">
+
+				<!--? FILTRO  -->
+				<div class="bg-green-400 col-span-12 change-filter lg:col-span-2 filtro p-2 pt-20">
+					<!-- CONTAINER FILTRO -->
+					<div class="filter-container  ">
+
+						<form th:action="@{/}">
+							<!-- TITULO -->
+							<h1 class="text-5xl text-white mt-10 mb-8">Filtros</h1>
+
+							<!-- GRID CHECKBOX SEXO -->
+							<div class="grid  grid-rows-2 gap-y-3">
+								<span
+									class="row-span-1 text-xl text-gray-700 pb-2 border-y-2 border-green-200">Sexo</span>
+								<div class="diminuir-pd">
+									<input type="checkbox" name="filtro_sexo" value="macho"
+										id="box-1"> <label for="box-1">Macho</label>
+								</div>
+								<div class="row-span-1 diminuir-pd">
+									<input type="checkbox" name="filtro_sexo" value="hembra"
+										id="box-2"> <label for="box-2">Hembra</label>
+								</div>
+								<!-- <input type="text" name="filtro_sexo" class="form-control"
+									id="filtro_sexo" th:value="${filtro_sexo}"
+									placeholder="Ingrese su busqueda"> -->
+							</div>
+
+							<!-- GRID INPUT RANGE EDAD -->
+							<div class="grid grid-cols-3  gap-y-3 mt-12 ">
+								<span
+									class="col-span-3 text-xl text-gray-700 pb-2 border-y-2 border-green-200">Edad</span>
+								<div class=" col-span-3 pt-5"
+									oninput="changeVar(rangeField.value)">
+									<label class="sliderBar"> <input id="rangeField"
+										class="inputDiv  mx-auto" type="range" list="mydata" min="0"
+										max="20" value="0" step="1"><br> <span id="hasta"
+										class="text-white">Todos </span> <output id="output"
+											class="text-white" value="50"></output><span id="años"
+										class="text-white"></span>
+									</label>
+								</div>
+							</div>
+
+							<!-- GRID CHECKBOX TAMAÑO -->
+							<div class="grid grid-rows-3  gap-y-3 mt-12">
+								<span
+									class="text-xl text-gray-700 pb-2 border-y-2 border-green-200 ">Tamaño</span>
+								<div class="row-span-1 mt-3 diminuir-pd">
+									<input type="checkbox" id="box-3"> <label for="box-3">Pequeño</label>
+								</div>
+								<div class="row-span-1 diminuir-pd">
+									<input type="checkbox" id="box-4"> <label for="box-4">Mediano</label>
+								</div>
+								<div class="row-span-1 diminuir-pd">
+									<input type="checkbox" id="box-5"> <label for="box-5">Grande</label>
+								</div>
+							</div>
+
+							<!-- GRID CHECKBOX TAMAÑO -->
+							<!--
+							<div class="grid grid-cols-3 gap-y-3 mt-12">
+								<span
+									class="col-span-3 text-xl text-gray-700 pb-2 border-y-2 border-green-200 ">Ciudad</span>
+								<select
+									class="col-span-3 border bg-white rounded px-3 py-2 outline-none mt-4 ml-5 w-4/5">
+									<option class="py-1">Todas</option>
+									<option class="py-1">Barcelona</option>
+									<option class="py-1">Madrid</option>
+								</select>
+							</div> -->
+
+							<!-- BUTTOS RESET Y FILTRAR -->
+							<div class="inline-flex  mt-10 mb-10">
+								<button
+									class="bg-gray-600 hover:bg-gray-400 text-white font-bold py-2 px-4 rounded-l">
+									Reset</button>
+								<button type="submit"
+									class=" bg-green-600 hover:bg-green-500 text-white font-bold py-2 px-4 rounded-r">
+									Filtrar</button>
+							</div>
+
+						</form>
+	
+					</div>
+					<!-- FIN CONTAINER FILTRO -->
+					
+					
+	</div>
+				<!-- FIN FILTRO -->
+						
+			
+
+				<!--*=============================== PAGINA DE PERROS =============================-->
+
+				<!--*=============================== PAGINA DE PERROS =============================-->
+
+				<div class="pg-principal bg-white col-span-12  lg:col-span-10 py-20 px-10">
+				
+					<button onclick="filtroDown()" class="mt-[-80px] btn-filter absolute bg-[#3bb266] text-white font-bold py-1 px-4 rounded-b-lg">
+  Filtrar
+</button>
+
+					<!-- CONTAINER PERROS -->
+					<div
+						class="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-3 grid-cols-1 xl:gap-x-2 gap-x-4 gap-y-8">
+
+
+						<!--? CARTA PERRO -->
+
+						<div class=" 2xl:w-[85%] xl:w-[90%] shadow-xl m-auto"
+							th:each="perro : ${perros}">
+
+							<!-- CONTAINER CARTA -->
+							<div class="card w-[100%]   bg-[#2b3546] rounded-xl space-y-4">
+
+								<!-- IMAGEN DEL PERRO  -->
+								<div class="content">
+									<img
+										class="img-carta w-full h-50 md:h-44 2xl:h-54 xl:h-44 lg:h-48 rounded-t-md transition hover:bg-cyan-300"
+										th:src="@{'/perritos/' + ${perro.img}}" th:alt="${perro.img}" />
+
+									<!-- INFOS -->
+									<div id="description">
+										<!-- SEXO DEL PERRO  -->
+										<span class="col-start-3 text-white"></span> <span
+											th:if="${perro.sexo == 'macho'}"> <i
+											class="icon-sex mt-4 fa-solid fa-mars text-blue-400"></i>
+										</span> <span th:if="${perro.sexo == 'hembra'}"> <i
+											class="icon-sex mt-4 fa-solid fa-venus text-red-400"></i>
+										</span>
+										<!-- NOMBRE DEL PERRO  -->
+										<div class="nombre ">
+											<div class="text-left pb-2" style="text-align: center;">
+												<span th:text="${perro.nombre}"
+													class="text-white xl:text-xl content-center text-2xl font-bold transition ">
+												</span>
+											</div>
+										</div>
+
+
+										<!-- DESCRIPCIONES -->
+										<div class="desc grid grid-cols-2">
+											<div class="icon-div my-1 flex text-sm pb-3 mx-4">
+												<!-- EDAD -->
+												<div class="icon-sexo h-5 w-5 grid content-center">
+
+													<i class="fa-regular fa-calendar text-green-400"></i>
+												</div>
+												<span class="col-start-3 text-white"
+													th:if="${perro.edad != 1}"> <span
+													class="text-white ml-1 "><span
+														class="edad-value text-white ml-2 "
+														th:text="${perro.edad}"></span> Años</span>
+												</span> <span class="col-start-3 text-white"
+													th:if="${perro.edad == 1}"> <span
+													class="text-white ml-1 "><span
+														class="edad-value text-white ml-2 "
+														th:text="${perro.edad}"></span> Año</span>
+												</span>
+											</div>
+											<div class="grid grid-cols-9 text-sm pb-3 mx-4">
+												<!-- TAMANO -->
+												<div class="icon-sexo h-5 w-5 grid content-center">
+													<i
+														class="fa-solid fa-down-left-and-up-right-to-center text-green-400"></i>
+												</div>
+												<span class="col-start-3 text-white"> <span
+													class="text-white m-1"
+													th:text="${#strings.capitalize(perro.tamano)}"> </span>
+												</span>
+											</div>
+										</div>
+										<ul class="sci">
+
+
+
+											<li class="bg-green-400 rounded-full p-1 px-3 "><a th:href="@{/perros/editar/{idPerro}(idPerro=${perro.idPerro})}"
+												>Ver mas <i
+													class="ml-2  fa-solid fa-paw"></i>
+
+											</a></li>
+										</ul>
+									</div>
+								</div>
+								<!-- FIN INFOS -->
+
+							</div>
+							<!-- FIN CONTAINER CARTA -->
+						</div>
+						<!-- FIN CARTA PERRO -->
+					</div>
+
+				</div>
+
+
+
+
+
+				<!--? BUTTON VOLVER AL TOPO -->
+				<button type="button" data-mdb-ripple="true"
+					data-mdb-ripple-color="light"
+					class="inline-block p-3 bg-green-400 text-white hover:bg-green-600 font-medium text-xs leading-tight uppercase rounded-full active:shadow-lg transition duration-150 ease-in-out bottom-5 right-5"
+					id="btn-back-to-top">
+					<svg aria-hidden="true" focusable="false" data-prefix="fas"
+						class="w-4 h-4" role="img" xmlns:th="http://www.w3.org/2000/svg"
+						viewBox="0 0 448 512">
+						<path fill="currentColor"
+							d="M34.9 289.5l-22.2-22.2c-9.4-9.4-9.4-24.6 0-33.9L207 39c9.4-9.4 24.6-9.4 33.9 0l194.3 194.3c9.4 9.4 9.4 24.6 0 33.9L413 289.4c-9.5 9.5-25 9.3-34.3-.4L264 168.6V456c0 13.3-10.7 24-24 24h-32c-13.3 0-24-10.7-24-24V168.6L69.2 289.1c-9.3 9.8-24.8 10-34.3.4z"></path></svg>
+				</button>
+
+
+
+
+
+			</div>
+			<!-- FIN GRID PARA SEPARAR    [FILTRO   |  PERROS] -->
+		</div>
+		<!-- FIN CONTAINER PAGINA PRINCIPAL W-100%  -->
+	</main>
+	<!-- FIN SESION PRINCIPAL  -->
+
+	<!--*=============================== FOOTER =============================-->
+
+
+	<!-- RAIA GRIS -->
+	<footer class="text-center bg-gray-900 text-white">
+		<div class="py-3">
+			<div class="flex justify-center mb-1">
+				<a href="#!" type="button"
+					class="rounded-full border-2 border-white text-white leading-normal uppercase hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out w-9 h-9 m-1">
+					 <svg aria-hidden="true" focusable="false" data-prefix="fab"
+						data-icon="facebook-f" class="w-2 h-full mx-auto" role="img"
+						xmlns:th="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+          <path fill="currentColor"
+							d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"></path>
+          </svg>
+				</a> <a href="#!" type="button"
+					class="rounded-full border-2 border-white text-white leading-normal uppercase hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out w-9 h-9 m-1">
+					<svg aria-hidden="true" focusable="false" data-prefix="fab"
+						data-icon="twitter" class="w-3 h-full mx-auto" role="img"
+						xmlns:th="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+            <path fill="currentColor"
+							d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"></path>
+          </svg>
+				</a> <a href="#!" type="button"
+					class="rounded-full border-2 border-white text-white leading-normal uppercase hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out w-9 h-9 m-1">
+					<svg aria-hidden="true" focusable="false" data-prefix="fab"
+						data-icon="google" class="w-3 h-full mx-auto" role="img"
+						xmlns:th="http://www.w3.org/2000/svg" viewBox="0 0 488 512">
+            <path fill="currentColor"
+							d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"></path>
+          </svg>
+				</a> <a href="#!" type="button"
+					class="rounded-full border-2 border-white text-white leading-normal uppercase hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out w-9 h-9 m-1">
+					<svg aria-hidden="true" focusable="false" data-prefix="fab"
+						data-icon="instagram" class="w-3 h-full mx-auto" role="img"
+						xmlns:th="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+            <path fill="currentColor"
+							d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"></path>
+          </svg>
+				</a> <a href="#!" type="button"
+					class="rounded-full border-2 border-white text-white leading-normal uppercase hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out w-9 h-9 m-1">
+					<svg aria-hidden="true" focusable="false" data-prefix="fab"
+						data-icon="linkedin-in" class="w-3 h-full mx-auto" role="img"
+						xmlns:th="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+            <path fill="currentColor"
+							d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z"></path>
+          </svg>
+				</a> <a href="#!" type="button"
+					class="rounded-full border-2 border-white text-white leading-normal uppercase hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out w-9 h-9 m-1">
+					<svg aria-hidden="true" focusable="false" data-prefix="fab"
+						data-icon="github" class="w-3 h-full mx-auto" role="img"
+						xmlns:th="http://www.w3.org/2000/svg" viewBox="0 0 496 512">
+            <path fill="currentColor"
+							d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path>
+          </svg>
+				</a>
+			</div>
+		</div>
+
+		<div class="text-center p-4"
+			style="background-color: rgba(0, 0, 0, 0.2);">
+			<!--! CREAR LOGIN ADMIN -->
+			<span class="">©</span> 2022 Copyright: <a class="text-whitehite"
+				th:href="@{https://tailwind-elements.com/}">REUBICA LTDA</a>
+		</div>
+	</footer>
+
+
+
+
+
+	<!--TODO SCRIPT JS -->
+		<script th:src="@{https://kit.fontawesome.com/a7ee2ea52b.js}"
+			crossorigin="anonymous"></script>
+		<!--TODO SCRIPT JQUERY -->
+		<script th:src="@{https://code.jquery.com/jquery-3.6.0.min.js}"
+			integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+			crossorigin="anonymous"></script>
+		<script th:src="@{/js/main.js}"></script>
+</body>
+<!-- FINAL DE LA PAGINA  -->
+
+
+
+</html>
+
+
+
